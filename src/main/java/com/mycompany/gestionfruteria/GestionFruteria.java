@@ -17,6 +17,7 @@ class ProductoFruteria {
     private String nombre;
     private double precioKilo;
     private double pesoDisponible;
+    public stopWatchh StopWatched;
 
     public ProductoFruteria(String nombre, double precioKilo, double pesoDisponible) {
         this.nombre = nombre;
@@ -90,9 +91,10 @@ public class GestionFruteria {
     }
 
     public static void main(String[] args) {
+        StopWatchh = new stopWatchh;
         GestionFruteria gestionFruteria = new GestionFruteria();
         Scanner scanner = new Scanner(System.in);
-
+       
         while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Agregar producto al inventario");
@@ -131,6 +133,23 @@ public class GestionFruteria {
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
+        }
+    }
+    
+    public class stopWatchh {
+        private long startTime;
+        private long endTime;
+
+        public void start() {
+            startTime = System.nanoTime(); // Inicia el cronómetro
+        }
+
+        public void stop() {
+            endTime = System.nanoTime(); // Detiene el cronómetro
+        }
+
+        public long getElapsedTime() {
+            return endTime - startTime; // Calcula el
         }
     }
 }
