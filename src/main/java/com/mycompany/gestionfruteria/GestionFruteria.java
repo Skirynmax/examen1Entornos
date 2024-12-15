@@ -6,6 +6,7 @@ package com.mycompany.gestionfruteria;
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -116,41 +117,65 @@ public class GestionFruteria {
             System.out.println("3. Vender producto");
             System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea después del número
+            
+            
+            int opcion;
+            try {
+                opcion = scanner.nextInt();
+                scanner.nextLine(); // Limpiar el buffer de entrada después de nextInt()
+            } catch (InputMismatchException e) {
+                System.out.println("Opción no válida. Debe ingresar un número.");
+                scanner.nextLine(); // Limpiar el buffer de entrada
+                continue;  // Volver al inicio del bucle
+            }
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese el nombre del producto: ");
-                    String nombre = scanner.nextLine();
-                    System.out.print("Ingrese el precio por kilo del producto: $");
-                    double precioKilo = scanner.nextDouble();
-                    scanner.nextLine(); // Consumir el salto de línea después del número
-                    System.out.print("Ingrese el peso disponible del producto en kilos: ");
-                    double peso = scanner.nextDouble();
-                    gestionFruteria.agregarProducto(nombre, precioKilo, peso);
+                    // Agregar producto
+                    try {
+                        System.out.print("Ingrese el nombre del producto: ");
+                        String nombre = scanner.nextLine();
+                        System.out.print("Ingrese el precio por kilo del producto: $");
+                        double precioKilo = scanner.nextDouble();
+                        scanner.nextLine(); // Consumir el salto de línea
+                        System.out.print("Ingrese el peso disponible del producto en kilos: ");
+                        double peso = scanner.nextDouble();
+                        scanner.nextLine(); // Consumir el salto de línea
+                        gestionFruteria.agregarProducto(nombre, precioKilo, peso);
+                    } catch (InputMismatchException exception) {
+                        System.out.println("Entrada inválida. Por favor ingrese números válidos.");
+                        scanner.nextLine(); // Limpiar el buffer de entrada
+                    }
                     break;
+
                 case 2:
+                    // Mostrar inventario
                     gestionFruteria.mostrarInventario();
                     break;
+
                 case 3:
-                    System.out.print("Ingrese el nombre del producto a vender: ");
-                    String productoVender = scanner.nextLine();
-                    System.out.print("Ingrese el peso a vender en kilos: ");
-                    double pesoVender = scanner.nextDouble();
-                    gestionFruteria.venderProducto(productoVender, pesoVender);
+                    // Vender producto
+                    try {
+                        System.out.print("Ingrese el nombre del producto a vender: ");
+                        String productoVender = scanner.nextLine();
+                        System.out.print("Ingrese el peso a vender en kilos: ");
+                        double pesoVender = scanner.nextDouble();
+                        gestionFruteria.venderProducto(productoVender, pesoVender);
+                    } catch (InputMismatchException exception) {
+                        System.out.println("Entrada inválida. Por favor ingrese números válidos.");
+                        scanner.nextLine(); // Limpiar el buffer de entrada
+                    }
                     break;
+
                 case 4:
                     System.out.println("Saliendo del programa.");
                     System.exit(0);
+                    break;
+
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
-            
-           
         }
-        
       
     }
 }
