@@ -14,30 +14,56 @@ import java.util.Scanner;
  * @author alban
  */
 
+
+/**
+ * Representa un producto en una frutería con información sobre su nombre, precio por kilo y peso disponible.
+ */
 class ProductoFruteria {
     private String nombre;
     private double precioKilo;
     private double pesoDisponible;
    
-
+  /**
+     * Constructor de la clase ProductoFruteria.
+     * 
+     * @param nombre El nombre del producto.
+     * @param precioKilo El precio por kilo del producto.
+     * @param pesoDisponible El peso disponible del producto en kilos.
+     */
     public ProductoFruteria(String nombre, double precioKilo, double pesoDisponible) {
         this.nombre = nombre;
         this.precioKilo = precioKilo;
         this.pesoDisponible = pesoDisponible;
     }
-
+   /**
+     * Obtiene el nombre del producto.
+     * 
+     * @return El nombre del producto.
+     */
     public String getNombre() {
         return nombre;
     }
-
+   /**
+     * Obtiene el precio por kilo del producto.
+     * 
+     * @return El precio por kilo del producto.
+     */
     public double getPrecioKilo() {
         return precioKilo;
     }
-
+   /**
+     * Obtiene el peso disponible del producto en kilos.
+     * 
+     * @return El peso disponible del producto.
+     */
     public double getPesoDisponible() {
         return pesoDisponible;
     }
-
+    /**
+     * Realiza la venta de una cantidad específica del producto.
+     * 
+     * @param peso El peso a vender en kilos.
+     */
     public void venderProducto(double peso) {
         if (peso <= pesoDisponible) {
             pesoDisponible -= peso;
@@ -52,15 +78,26 @@ class ProductoFruteria {
         return "Nombre: " + nombre + ", Precio por Kilo: $" + precioKilo + ", Peso Disponible: " + pesoDisponible + " kg";
     }
 }
-
+/**
+ * Clase que gestiona el inventario de productos en una frutería, incluyendo agregar, mostrar y vender productos.
+ */
 public class GestionFruteria {
     private ArrayList<ProductoFruteria> inventario;
-
+  /**
+     * Constructor de la clase GestionFruteria.
+     * Inicializa el inventario como una lista vacía.
+     */
     public GestionFruteria() {
         inventario = new ArrayList<>();
        
     }
-
+   /**
+     * Agrega un nuevo producto al inventario de la frutería.
+     * 
+     * @param nombre El nombre del producto.
+     * @param precioKilo El precio por kilo del producto.
+     * @param pesoDisponible El peso disponible del producto en kilos.
+     */
     public void agregarProducto(String nombre, double precioKilo, double pesoDisponible) {
         stopWatch StopWatch = new stopWatch();
         StopWatch.start();
@@ -70,7 +107,10 @@ public class GestionFruteria {
         StopWatch.stop();
         System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
-
+   /**
+     * Muestra el inventario de productos disponibles en la frutería.
+     * Si el inventario está vacío, muestra un mensaje indicando que no hay productos disponibles.
+     */
     public void mostrarInventario() {
         stopWatch StopWatch = new stopWatch();
         StopWatch.start();
@@ -85,7 +125,12 @@ public class GestionFruteria {
         StopWatch.stop();
         System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
-
+   /**
+     * Vende una cantidad específica de un producto del inventario.
+     * 
+     * @param nombre El nombre del producto a vender.
+     * @param peso El peso a vender en kilos.
+     */
     public void venderProducto(String nombre, double peso) {
         boolean encontrado = false;
         stopWatch StopWatch = new stopWatch();
@@ -104,7 +149,12 @@ public class GestionFruteria {
         StopWatch.stop();
         System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
-
+    /**
+     * Método principal que ejecuta el programa de gestión de la frutería.
+     * Permite al usuario agregar productos, ver el inventario, vender productos y salir.
+     * 
+     * @param args Argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
        
         GestionFruteria gestionFruteria = new GestionFruteria();
