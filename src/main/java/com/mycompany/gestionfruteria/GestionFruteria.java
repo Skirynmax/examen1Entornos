@@ -17,7 +17,7 @@ class ProductoFruteria {
     private String nombre;
     private double precioKilo;
     private double pesoDisponible;
-    public stopWatchh StopWatched;
+   
 
     public ProductoFruteria(String nombre, double precioKilo, double pesoDisponible) {
         this.nombre = nombre;
@@ -57,15 +57,22 @@ public class GestionFruteria {
 
     public GestionFruteria() {
         inventario = new ArrayList<>();
+       
     }
 
     public void agregarProducto(String nombre, double precioKilo, double pesoDisponible) {
+        stopWatch StopWatch = new stopWatch();
+        StopWatch.start();
         ProductoFruteria nuevoProducto = new ProductoFruteria(nombre, precioKilo, pesoDisponible);
         inventario.add(nuevoProducto);
         System.out.println("Producto agregado: " + nuevoProducto);
+        StopWatch.stop();
+        System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
 
     public void mostrarInventario() {
+        stopWatch StopWatch = new stopWatch();
+        StopWatch.start();
         if (inventario.isEmpty()) {
             System.out.println("El inventario está vacío.");
         } else {
@@ -74,10 +81,14 @@ public class GestionFruteria {
                 System.out.println(producto);
             }
         }
+        StopWatch.stop();
+        System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
 
     public void venderProducto(String nombre, double peso) {
         boolean encontrado = false;
+        stopWatch StopWatch = new stopWatch();
+        StopWatch.start();
         for (ProductoFruteria producto : inventario) {
             if (producto.getNombre().equalsIgnoreCase(nombre)) {
                 producto.venderProducto(peso);
@@ -88,13 +99,16 @@ public class GestionFruteria {
         if (!encontrado) {
             System.out.println("Producto no encontrado en el inventario.");
         }
+        
+        StopWatch.stop();
+        System.out.println("Duracion"+ StopWatch.getElapsedTime());
     }
 
     public static void main(String[] args) {
-        StopWatchh = new stopWatchh;
+       
         GestionFruteria gestionFruteria = new GestionFruteria();
         Scanner scanner = new Scanner(System.in);
-       
+
         while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Agregar producto al inventario");
@@ -133,23 +147,10 @@ public class GestionFruteria {
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
+            
+           
         }
-    }
-    
-    public class stopWatchh {
-        private long startTime;
-        private long endTime;
-
-        public void start() {
-            startTime = System.nanoTime(); // Inicia el cronómetro
-        }
-
-        public void stop() {
-            endTime = System.nanoTime(); // Detiene el cronómetro
-        }
-
-        public long getElapsedTime() {
-            return endTime - startTime; // Calcula el
-        }
+        
+      
     }
 }
